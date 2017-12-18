@@ -1,0 +1,60 @@
+body {
+	margin: 50px;
+}
+
+.box {
+	height: 200px;
+	width: 200px;
+}
+
+.box-container {
+	padding: 20px;
+	height: 220px;
+	width: 220px;
+}
+
+#red {
+	background-color: darkred;
+	border-bottom-right-radius: 200px
+	
+}
+
+#green {
+	background-color: darkgreen;
+	border-top-left-radius: 200px
+}
+
+#yellow {
+	background-color: #B0A64A;
+	border-top-right-radius: 200px
+}
+
+#blue {
+	background-color: darkblue;
+	border-bottom-left-radius: 200px
+}
+
+/*#red:hover {
+	background-color: red;
+}
+
+#blue:hover {
+	background-color: #1DA2FF;
+}
+
+#green:hover {
+	background-color: #0AFF09;
+}
+
+#yellow:hover {
+	background-color: #FEFF09;
+}*/
+
+#start {
+	margin-left: 165px;
+}
+
+#count {
+	margin-left: 180px;
+	margin-top: 10px;
+}
