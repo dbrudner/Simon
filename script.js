@@ -4,6 +4,7 @@ $(document).ready(function() {
 	var sequence = [];
 	var playerAnswer = [];
 	var playerTurn
+	var playerColorCounter = 0;
 
 	var green = "green"
 	var yellow = "yellow"
@@ -14,12 +15,36 @@ $(document).ready(function() {
 		$("#turn-count").text(`Turn: ${turnNumber}`)
 	}
 
+	var playColor = (originalColor, highlightColor, elementId, audioLink) => {
+				$(elementId).css("background-color", highlightColor)
+						new Audio(audioLink).play()
+						setTimeout(function() {
+							$(elementId).css("background-color", originalColor)
+							
+							}, 1000)
+	}
+
+	var playColorGreen = () => {
+		playColor("darkGreen", "#0AFF09", "#green", 'https://s3.amazonaws.com/freecodecamp/simonSound1.mp3')
+	}
+
+	var playColorYellow = () => {
+		playColor("#B0A64A", "yellow", "#yellow", 'https://s3.amazonaws.com/freecodecamp/simonSound2.mp3')	
+	}
+
+	var playColorBlue = () => {
+		playColor("darkblue", "#1DA2FF", "#blue", 'https://s3.amazonaws.com/freecodecamp/simonSound3.mp3')	
+	}
+
+	var playColorRed = () => {
+		playColor("darkred", "red", "#red", 'https://s3.amazonaws.com/freecodecamp/simonSound4.mp3')	
+	}
+
 	var startGame = () => {
 	    turn = 0;
 	    sequence = [];
-	    playerAnswer = [];
 	    addColor();
-	    playColors([0,1,2,3], 0);
+	    playColors(sequence, 0);
 	    $("button").remove()
 	    // playerTurn();
 	}
@@ -30,67 +55,40 @@ $(document).ready(function() {
 			var i = 0;
 			delay();
 
-			function changeColor(originalColor, highlightColor, elementId, audioLink) {
-				$(elementId).css("background-color", highlightColor)
-						new Audio(audioLink).play()
-						setTimeout(function() {
-							$(elementId).css("background-color", originalColor)
-							
-							}, 1000)
-			}
+			function delay() {
 
-			function delay() {           
-				setTimeout(function () {    
+				setTimeout(function () {
+
 				    if (array[i] === "green") {
-				    	changeColor("darkGreen", "#0AFF09", "#green", 'https://s3.amazonaws.com/freecodecamp/simonSound1.mp3')
-				    	
-					// $("#green").css("background-color", "#0AFF09")
-					// setTimeout(function() {
-					// 	$("#green").css("background-color", "darkgreen")
-					// 	}, 1000)			
+				    	playColorGreen()
 					}
 
 					if (array[i] === "yellow") {
-						changeColor("#B0A64A", "yellow", "#yellow", 'https://s3.amazonaws.com/freecodecamp/simonSound2.mp3')
-
-						// $("#yellow").css("background-color", "yellow")
-						// setTimeout(function() {
-						// 	$("#yellow").css("background-color", "#B0A64A")
-						// 	}, 1000)			
+						playColorYellow()
 					}
 
 					if (array[i] === "blue") {
-
-						changeColor("darkblue", "#1DA2FF", "#blue", 'https://s3.amazonaws.com/freecodecamp/simonSound3.mp3')
-						
-						// $("#blue").css("background-color", "#1DA2FF")
-						// setTimeout(function() {
-						// 	$("#blue").css("background-color", "darkblue")
-						// 	}, 1000)			
+						playColorBlue()
 					}
 
 					if (array[i] === "red") {
-
-						changeColor("darkred", "red", "#red", 'https://s3.amazonaws.com/freecodecamp/simonSound4.mp3')
-						
-						// $("#red").css("background-color", "red")
-						// setTimeout(function() {
-						// 	$("#red").css("background-color", "darkred")
-						// 	}, 1000)			
+						playColorRed()
 					}
 
-				    i++;                     
+				    i++;
+
 				    if (i < array.length) {            
 				        delay();            
 				    }
 
 				    if (i === array.length) {
 				    	playerTurn = true;
+
 				    }
 
 				}, 1000)
 			}		
-		};
+	};
 
 	var addColor = () => {
 
@@ -117,12 +115,41 @@ $(document).ready(function() {
 		playerTurn = false;
 	}
 
-	var playerTurn = () => {
+	$(".box").on("click", function() {
+			if (playerTurn) {
+				playerAnswer.push($(this).attr("id"));
+		    	playerColorCounter++
 
+		    	if ($(this).attr("id") === "green") {
+		    		playerAnswer.push("green")
+		    		playColorGreen()
+		    	}
 
+		    	else if ($(this).attr("id") === "yellow") {
+		    		playerAnswer.push("yellow")
+		    		playColorYellow()
+		    	}
 
-	}
-	
+		    	else if ($(this).attr("id") === "blue") {
+		    		playerAnswer.push("blue")
+		    		playColorBlue()
+		    	}
+
+		    	else if ($(this).attr("id") === "red") {
+		    		playerAnswer.push("red")
+		    		playColorRed()
+		    	}
+
+		    	if (turn === playerColorCounter) {
+		    		playerColorCounter = 0;
+		    		playerTurn = false;
+		    		playerAnswer = [];
+		    		addColor();
+		    	}
+			}
+	    	
+
+	})
 
 	$("#start").on("click", function() {
 		startGame()
