@@ -50,7 +50,7 @@ $(document).ready(function() {
 	}
 
 	function playColors (array, i) {
-			console.log(array);
+			// console.log(array);
 			var arr = array;
 			var i = 0;
 			delay();
@@ -115,36 +115,58 @@ $(document).ready(function() {
 		playerTurn = false;
 	}
 
+	var checkAnswer = (sequence, playerAnswer, playerColorCounter) => {
+
+		var slicedSequence = sequence.slice(0, playerColorCounter);
+		console.log("Answer: " + slicedSequence)
+		console.log("Player: " + playerAnswer)
+
+		if (slicedSequence.toString() === playerAnswer.toString()) {
+			console.log("Correct");
+		}
+		if (slicedSequence.toString() != playerAnswer.toString()) {
+			console.log("Wrong")
+			turn = 0;
+			playerColorCounter = 0;
+	    	sequence = [];
+	    	playerAnswer = [];
+		}
+
+	}
+
 	$(".box").on("click", function() {
+			// console.log(playerAnswer);
 			if (playerTurn) {
 				playerAnswer.push($(this).attr("id"));
 		    	playerColorCounter++
 
 		    	if ($(this).attr("id") === "green") {
-		    		playerAnswer.push("green")
 		    		playColorGreen()
+		    		checkAnswer(sequence, playerAnswer, playerColorCounter)
 		    	}
 
 		    	else if ($(this).attr("id") === "yellow") {
-		    		playerAnswer.push("yellow")
 		    		playColorYellow()
+		    		checkAnswer(sequence, playerAnswer, playerColorCounter)
 		    	}
 
 		    	else if ($(this).attr("id") === "blue") {
-		    		playerAnswer.push("blue")
 		    		playColorBlue()
+		    		checkAnswer(sequence, playerAnswer, playerColorCounter)
 		    	}
 
 		    	else if ($(this).attr("id") === "red") {
-		    		playerAnswer.push("red")
 		    		playColorRed()
+		    		checkAnswer(sequence, playerAnswer, playerColorCounter)
 		    	}
 
 		    	if (turn === playerColorCounter) {
+		    		console.log("done")
 		    		playerColorCounter = 0;
 		    		playerTurn = false;
 		    		playerAnswer = [];
 		    		addColor();
+		    		playColors(sequence, 0)
 		    	}
 			}
 	    	
