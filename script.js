@@ -130,6 +130,9 @@ $(document).ready(function() {
 			playerColorCounter = 0;
 	    	sequence = [];
 	    	playerAnswer = [];
+	    	playerTurn = false;
+	    	$("#start-button").append('<button id="start" class="btn">Start Game</button>')
+	    	showTurnNumber(turn);
 		}
 
 	}
