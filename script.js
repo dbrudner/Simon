@@ -43,14 +43,16 @@ $(document).ready(function() {
 	var startGame = () => {
 	    turn = 0;
 	    sequence = [];
+	    playerAnswer = [];
+	    playerColorCounter = 0;
 	    addColor();
 	    playColors(sequence, 0);
 	    $("button").remove()
-	    // playerTurn();
+	    
 	}
 
 	function playColors (array, i) {
-			// console.log(array);
+			
 			var arr = array;
 			var i = 0;
 			delay();
@@ -110,15 +112,16 @@ $(document).ready(function() {
 		}
 
 		turn++
-		console.log(turn);
 		showTurnNumber(turn)
 		playerTurn = false;
 	}
 
 	var checkAnswer = (sequence, playerAnswer, playerColorCounter) => {
+		console.log(turn);
+		console.log(playerColorCounter)
 
 		var slicedSequence = sequence.slice(0, playerColorCounter);
-		console.log("Answer: " + slicedSequence)
+		console.log("Answer: " + sequence)
 		console.log("Player: " + playerAnswer)
 
 		if (slicedSequence.toString() === playerAnswer.toString()) {
@@ -126,13 +129,10 @@ $(document).ready(function() {
 		}
 		if (slicedSequence.toString() != playerAnswer.toString()) {
 			console.log("Wrong")
-			turn = 0;
-			playerColorCounter = 0;
 	    	sequence = [];
-	    	playerAnswer = [];
-	    	playerTurn = false;
 	    	$("#start-button").append('<button id="start" class="btn">Start Game</button>')
 	    	showTurnNumber(turn);
+	    	
 		}
 
 	}
@@ -164,19 +164,19 @@ $(document).ready(function() {
 		    	}
 
 		    	if (turn === playerColorCounter) {
-		    		console.log("done")
+		    		playerAnswer = [];
 		    		playerColorCounter = 0;
 		    		playerTurn = false;
-		    		playerAnswer = [];
 		    		addColor();
 		    		playColors(sequence, 0)
+		    		
 		    	}
 			}
 	    	
 
 	})
 
-	$("#start").on("click", function() {
+	$(document).on("click", "#start", function() {
 		startGame()
 	})
 })
