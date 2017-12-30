@@ -59,19 +59,19 @@ $(document).ready(function() {
 
 				setTimeout(function () {
 
-				    if (array[i] === "green") {
+				    if (array[i] === green) {
 				    	playColorGreen()
 					}
 
-					if (array[i] === "yellow") {
+					if (array[i] === yellow) {
 						playColorYellow()
 					}
 
-					if (array[i] === "blue") {
+					if (array[i] === blue) {
 						playColorBlue()
 					}
 
-					if (array[i] === "red") {
+					if (array[i] === red) {
 						playColorRed()
 					}
 
@@ -143,22 +143,22 @@ $(document).ready(function() {
 				playerAnswer.push($(this).attr("id"));
 		    	playerColorCounter++
 
-		    	if ($(this).attr("id") === "green") {
+		    	if ($(this).attr("id") === green) {
 		    		playColorGreen()
 		    		checkAnswer(sequence, playerAnswer, playerColorCounter)
 		    	}
 
-		    	else if ($(this).attr("id") === "yellow") {
+		    	else if ($(this).attr("id") === yellow) {
 		    		playColorYellow()
 		    		checkAnswer(sequence, playerAnswer, playerColorCounter)
 		    	}
 
-		    	else if ($(this).attr("id") === "blue") {
+		    	else if ($(this).attr("id") === blue) {
 		    		playColorBlue()
 		    		checkAnswer(sequence, playerAnswer, playerColorCounter)
 		    	}
 
-		    	else if ($(this).attr("id") === "red") {
+		    	else if ($(this).attr("id") === red) {
 		    		playColorRed()
 		    		checkAnswer(sequence, playerAnswer, playerColorCounter)
 		    	}
